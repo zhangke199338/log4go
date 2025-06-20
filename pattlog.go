@@ -25,7 +25,7 @@ type formatCacheType struct {
 var formatCache = &formatCacheType{}
 var muFormatCache = sync.Mutex{}
 
-func setFormatCache(f *formatCacheType)  {
+func setFormatCache(f *formatCacheType) {
 	muFormatCache.Lock()
 	defer muFormatCache.Unlock()
 	formatCache = f
@@ -35,6 +35,7 @@ func getFormatCache() *formatCacheType {
 	defer muFormatCache.Unlock()
 	return formatCache
 }
+
 // Known format codes:
 // %T - Time (15:04:05 MST)
 // %t - Time (15:04)
@@ -66,7 +67,7 @@ func FormatLogRecord(format string, rec *LogRecord) string {
 			shortTime:         fmt.Sprintf("%02d:%02d", hour, minute),
 			shortDate:         fmt.Sprintf("%02d/%02d/%02d", day, month, year%100),
 			longTime:          fmt.Sprintf("%02d:%02d:%02d %s", hour, minute, second, zone),
-			longDate:          fmt.Sprintf("%04d/%02d/%02d", year, month, day),
+			longDate:          fmt.Sprintf("%04d-%02d-%02d", year, month, day),
 		}
 		cache = updated
 		setFormatCache(updated)
