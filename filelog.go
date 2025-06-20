@@ -58,13 +58,14 @@ func (w *FileLogWriter) Close() {
 // to configure log rotation based on lines, size, and daily.
 //
 // The standard log-line format is:
-//   [%D %T] [%L] (%S) %M
+//
+//	[%D %T] [%L] (%S) %M
 func NewFileLogWriter(fname string, rotate bool) *FileLogWriter {
 	w := &FileLogWriter{
 		rec:       make(chan *LogRecord, LogBufferLength),
 		rot:       make(chan bool),
 		filename:  fname,
-		format:    "[%D %T] [%L] (%S) %M",
+		format:    "%D %T [%L] (%S) %M",
 		rotate:    rotate,
 		maxbackup: 999,
 	}
