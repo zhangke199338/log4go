@@ -80,14 +80,14 @@ func FormatLogRecord(format string, rec *LogRecord) string {
 	for i, piece := range pieces {
 		if i > 0 && len(piece) > 0 {
 			switch piece[0] {
-			case 'T':
-				out.WriteString(cache.longTime)
-			case 't':
-				out.WriteString(cache.shortTime)
 			case 'D':
 				out.WriteString(cache.longDate)
 			case 'd':
 				out.WriteString(cache.shortDate)
+			case 'T':
+				out.WriteString(cache.longTime)
+			case 't':
+				out.WriteString(cache.shortTime)
 			case 'L':
 				out.WriteString(levelStrings[rec.Level])
 			case 'S':
